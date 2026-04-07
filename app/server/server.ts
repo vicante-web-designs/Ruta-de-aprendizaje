@@ -19,12 +19,11 @@ app.get('/api/todo', (req, res) => {
 
 app.get('/api/todo/:id', (req, res) => {
     const todoID = req.params.id
-    if(todoID){
-        const todo = todoList.find(item => item.id === Number(todoID))
-        res.json(todo)
-    } else {
-        res.json()
+    const todo = todoList.find(item => item.id === Number(todoID))
+    if(!todo){
+        res.status(404).json(`Todo item ${todoID} does not exist`)
     }
+    res.json(todo)
 }) //get one todo
 
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`))
