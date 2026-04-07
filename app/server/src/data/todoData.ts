@@ -4,7 +4,7 @@ export const todoList: Todo[] = [
     {
         id: 1,
         title: 'Complete CIT191',
-        description: 'FInish CIT191 practical before friday',
+        description: 'Finish CIT191 practical before friday',
         status: 'pending',
         dueDate: '2024-03-22'  
     },
