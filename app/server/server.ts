@@ -19,11 +19,45 @@ app.get('/api/todo', (req, res) => {
 
 app.get('/api/todo/:id', (req, res) => {
     const todoID = req.params.id
-    const todo = todoList.find(item => item.id === Number(todoID))
+    const todo = todoList.find(item => item.id === todoID)
     if(!todo){
-        res.status(404).json(`Todo item ${todoID} does not exist`)
+        return res.status(404).json({error: `Todo item ${todoID} does not exist`})
     }
     res.json(todo)
 }) //get one todo
+
+app.post('/api/todo', (req, res) => {
+    const { title, description, status, dueDate } = req.body //get the post request details
+
+    if(!title){
+        return res.status(400).json({error: `Title is required`})
+    }// validation checks
+
+    const newTodo = {
+        id: crypto.randomUUID(),
+        title: title,
+        description: description,
+        status: status,
+        dueDate: dueDate
+    } // Create a newTodo object
+
+    todoList.push(newTodo) //Push to array
+
+    res.status(201).json(newTodo)// 
+})
+
+app.put('/api/todo/:id', (req, res) => {
+    const todoId = req.params.id
+    const todo = todoList.find(item => item.id === todoId)
+    const { title, description, status, dueDate } = req.body
+
+    if(!todo){
+        return res.status(400).json({error: `Todo Item ${todoId} not found`})
+    }
+    // update the object
+    
+
+
+})
 
 app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`))
