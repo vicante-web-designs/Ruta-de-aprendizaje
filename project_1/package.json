@@ -2,7 +2,7 @@
   "name": "project_1",
   "version": "1.0.0",
   "description": "A simple backend server",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js"
   },
